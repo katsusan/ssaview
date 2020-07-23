@@ -31,4 +31,4 @@ for example, `-f main:number_lines-early_copyelim,stackfram`. ("_" will be repla
 ```
 
 # Preview
-[](/ssa_web.png)
+![](/ssa_web.png)
