@@ -30,4 +30,5 @@ for example, `-f main:number_lines-early_copyelim,stackfram`. ("_" will be repla
 "genssa"            //final assembly
 ```
 
-[](ssa_web.png)
+# Preview
+[](/ssa_web.png)
