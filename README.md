@@ -4,6 +4,7 @@ tool for hacking the detail from initial SSA to final generated assembly.
 
 
 # Usage:
+$ go get github.com/Katsusan/ssaview
 $ ssaview -f=main -args="-N -l" -h=127.0.0.1 -p=9000 hello.go   
 $ ssaview -f=main hello.go   
 $ ssaview hello.go world.go   
