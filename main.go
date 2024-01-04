@@ -11,7 +11,6 @@ import (
 	"os/exec"
 	"os/signal"
 	"strconv"
-	"strings"
 	"syscall"
 	"time"
 )
@@ -70,16 +69,16 @@ func doMain() error {
 			fmt.Fprintf(os.Stderr, "failed to remove ssa.html,%v\n", err)
 		}
 	}
-	//1. use GOSSAFUNC=f go tool compile file to generate ssa.html
-	cmd := exec.Command("go", "tool", "compile")
-	cmd.Env = append(os.Environ(),
-		"GOSSAFUNC="+ssafunc,
-	)
+	// 1. use GOSSAFUNC=f go build file to generate ssa.html
+	// see ttps://github.com/golang/go/issues/58629, use go build instead.
+	cmd := exec.Command("go", "build")
+	cmd.Env = append(os.Environ(), fmt.Sprintf(`GOSSAFUNC=%s`, ssafunc))
 
 	if len(gcflags) != 0 {
-		var flg []string //turn space-separated arguments into slice
-		flg = strings.Split(gcflags, " ")
-		cmd.Args = append(cmd.Args, flg...)
+		//var flg []string //turn space-separated arguments into slice
+		//flg = strings.Split(gcflags, " ")
+		flg := "gcflags="+ gcflags
+		cmd.Args = append(cmd.Args, flg)
 	}
 	cmd.Args = append(cmd.Args, "-o", tmpobj)
 	cmd.Args = append(cmd.Args, files...)
